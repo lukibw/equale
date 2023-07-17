@@ -1,8 +1,4 @@
-export type Digit = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-
-export type Operator = "+" | "-" | "*" | "/" | "%" | "^" | "=";
-
-export type Token = Digit | Operator;
+import { Operator, Token } from "./token";
 
 type Expr = BinaryExpr | number;
 
@@ -160,6 +156,9 @@ const resolveBinaryExpr = (expr: BinaryExpr) => {
 };
 
 export const verify = (tokens: Token[]) => {
+  if (tokens.length !== 8) {
+    return false;
+  }
   const formula = formulaHandler({ current: 0, tokens });
   return !!formula && resolveBinaryExpr(formula.left) === formula.right;
 };
