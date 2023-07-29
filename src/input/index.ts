@@ -1,3 +1,3 @@
-export { random } from "./random";
+export { Random, generate } from "./generate";
 export { Digit, Operator, Token } from "./token";
-export { verify } from "./verify";
+export { Issue, IssueKind, verify } from "./verify";
