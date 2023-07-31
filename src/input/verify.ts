@@ -2,10 +2,10 @@ import { Operator, Token } from "./token";
 
 export enum IssueKind {
   LeadingZero = "number cannot start with 0",
-  DivideByZero = "cannot divide by 0",
   MissingEquality = "expected equality operator",
   MissingNumber = "expected number",
   WrongSize = "formula size must be 8",
+  NotAllowed = "operation not allowed",
   NotBinary = "the left side of the formula must be a binary operation",
   NotEqual = "the left side of the formula must be equal to the right side",
   NotEnd = "expected end of the formula",
@@ -21,11 +21,20 @@ export class Issue {
   }
 }
 
+export const IssueMissingEquality = new Issue(IssueKind.MissingEquality);
+
+export const IssueWrongSize = new Issue(IssueKind.WrongSize);
+
+export const IssueNotBinary = new Issue(IssueKind.NotBinary);
+
+export const IssueNotEqual = new Issue(IssueKind.NotEqual);
+
 type Expr = BinaryExpr | number;
 
 interface BinaryExpr {
   left: Expr;
   operator: Operator;
+  index: number;
   right: Expr;
 }
 
@@ -47,19 +56,8 @@ const peek = (s: State) => {
   return s.tokens[s.current];
 };
 
-const previous = (s: State) => {
-  if (s.current === 0) {
-    return null;
-  }
-  return s.tokens[s.current - 1];
-};
-
 const advance = (s: State) => {
   s.current++;
-};
-
-const issue = (s: State, kind: IssueKind) => {
-  return new Issue(kind, s.current);
 };
 
 type Handler<T> = (s: State) => T | Issue;
@@ -74,6 +72,7 @@ const newHandler = (
       return left;
     }
     while (true) {
+      const index = s.current;
       const operator = peek(s) as Operator;
       if (!operators.includes(operator)) {
         break;
@@ -83,7 +82,7 @@ const newHandler = (
       if (right instanceof Issue) {
         return right;
       }
-      left = { left, operator, right };
+      left = { left, operator, index, right };
     }
     return left;
   };
@@ -92,18 +91,15 @@ const newHandler = (
 const number: Handler<number> = (s) => {
   let n = peek(s);
   if (typeof n !== "number") {
-    return issue(s, IssueKind.MissingNumber);
+    return new Issue(IssueKind.MissingNumber, s.current);
   }
   advance(s);
   if (n === 0) {
     if (typeof peek(s) === "number") {
-      return issue(s, IssueKind.LeadingZero);
+      return new Issue(IssueKind.LeadingZero, s.current - 1);
+    } else {
+      return 0;
     }
-    const prev = previous(s);
-    if (prev === "/" || prev === "%") {
-      return issue(s, IssueKind.DivideByZero);
-    }
-    return 0;
   }
   let m = 0;
   while (true) {
@@ -134,11 +130,11 @@ const formulaHandler: Handler<Formula> = (s) => {
   if (left instanceof Issue) {
     return left;
   }
-  if (typeof left === "number") {
-    return new Issue(IssueKind.NotBinary);
+  if (isEnd(s)) {
+    return IssueMissingEquality;
   }
-  if (peek(s) !== "=") {
-    return issue(s, IssueKind.MissingEquality);
+  if (typeof left === "number") {
+    return IssueNotBinary;
   }
   advance(s);
   const right = number(s);
@@ -146,52 +142,79 @@ const formulaHandler: Handler<Formula> = (s) => {
     return right;
   }
   if (!isEnd(s)) {
-    return issue(s, IssueKind.NotEnd);
+    return new Issue(IssueKind.NotEnd, s.current);
   }
   return { left, right };
 };
 
-const resolveBinaryExpr = (expr: BinaryExpr) => {
+const resolveBinaryExpr = (expr: BinaryExpr): Issue | number => {
   let left: number;
   let right: number;
   if (typeof expr.left === "number") {
     left = expr.left;
   } else {
-    left = resolveBinaryExpr(expr.left);
+    const x = resolveBinaryExpr(expr.left);
+    if (x instanceof Issue) {
+      return x;
+    }
+    left = x;
   }
   if (typeof expr.right === "number") {
     right = expr.right;
   } else {
-    right = resolveBinaryExpr(expr.right);
+    const x = resolveBinaryExpr(expr.right);
+    if (x instanceof Issue) {
+      return x;
+    }
+    right = x;
   }
-  switch (expr.operator) {
-    case "+":
-      return left + right;
-    case "-":
-      return left - right;
-    case "*":
-      return left * right;
-    case "/":
-      return left / right;
-    case "%":
-      return left % right;
-    case "^":
-      return left ** right;
-    default:
-      throw new Error("cannot resolve binary expression");
+  if (left !== 0 && right !== 0) {
+    switch (expr.operator) {
+      case "+":
+        return left + right;
+      case "-":
+        if (right > left) {
+          break;
+        }
+        return left - right;
+      default:
+        if (left !== 1 && right !== 1) {
+          switch (expr.operator) {
+            case "*":
+              return left * right;
+            case "/":
+              if (left % right !== 0) {
+                break;
+              }
+              return left / right;
+            case "%":
+              if (left % right === 0) {
+                break;
+              }
+              return left % right;
+            case "^":
+              return left ** right;
+          }
+        }
+    }
   }
+  return new Issue(IssueKind.NotAllowed, expr.index);
 };
 
 export const verify = (tokens: Token[]): Issue | null => {
   if (tokens.length !== 8) {
-    return new Issue(IssueKind.WrongSize);
+    return IssueWrongSize;
   }
   const formula = formulaHandler({ current: 0, tokens });
   if (formula instanceof Issue) {
     return formula;
   }
-  if (resolveBinaryExpr(formula.left) !== formula.right) {
-    return new Issue(IssueKind.NotEqual);
+  const resolved = resolveBinaryExpr(formula.left);
+  if (resolved instanceof Issue) {
+    return resolved;
+  }
+  if (resolved !== formula.right) {
+    return IssueNotEqual;
   }
   return null;
 };
