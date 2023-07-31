@@ -10,13 +10,312 @@
       href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="app.ts"></script>
-    <title>My First Parcel App</title>
+    <link rel="stylesheet" href="index.css" />
+    <title>Formulale</title>
   </head>
   <body>
     <div class="container">
       <h1 class="header">Formulale</h1>
+      <div class="guess">
+        <div class="guess-row" role="group" aria-label="row 1">
+          <div
+            class="guess-cell guess-cell-correct"
+            role="img"
+            aria-roledescription="tile"
+            aria-label="7 correct"
+            aria-live="polite"
+          >
+            7
+          </div>
+          <div
+            class="guess-cell guess-cell-correct"
+            role="img"
+            aria-roledescription="tile"
+            aria-label="2 correct"
+            aria-live="polite"
+          >
+            2
+          </div>
+          <div
+            class="guess-cell guess-cell-absent"
+            role="img"
+            aria-roledescription="tile"
+            aria-label="addition absent"
+            aria-live="polite"
+          >
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <div
+            class="guess-cell guess-cell-present"
+            role="img"
+            aria-roledescription="tile"
+            aria-label="1 present"
+            aria-live="polite"
+          >
+            1
+          </div>
+          <div
+            class="guess-cell guess-cell-present"
+            role="img"
+            aria-roledescription="tile"
+            aria-label="1 present"
+            aria-live="polite"
+          >
+            1
+          </div>
+          <div
+            class="guess-cell guess-cell-correct"
+            role="img"
+            aria-roledescription="tile"
+            aria-label="equality correct"
+            aria-live="polite"
+          >
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <line x1="5" y1="9" x2="19" y2="9"></line>
+              <line x1="5" y1="15" x2="19" y2="15"></line>
+            </svg>
+          </div>
+          <div
+            class="guess-cell guess-cell-absent"
+            role="img"
+            aria-roledescription="tile"
+            aria-label="8 absent"
+            aria-live="polite"
+          >
+            8
+          </div>
+          <div
+            class="guess-cell guess-cell-present"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+            aria-label="3 present"
+          >
+            3
+          </div>
+        </div>
+        <div class="guess-row" role="group" aria-label="row 2">
+          <div
+            class="guess-cell"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+            aria-label="7"
+          >
+            7
+          </div>
+          <div
+            class="guess-cell"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+            aria-label="2"
+          >
+            2
+          </div>
+          <div
+            class="guess-cell"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+            aria-label="subtraction"
+          >
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </div>
+          <div
+            class="guess-cell guess-cell-current"
+            aria-label="empty"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+          ></div>
+          <div
+            class="guess-cell"
+            aria-label="empty"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+          ></div>
+          <div
+            class="guess-cell"
+            aria-label="empty"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+          ></div>
+          <div
+            class="guess-cell"
+            aria-label="empty"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+          ></div>
+          <div
+            class="guess-cell"
+            aria-label="empty"
+            role="img"
+            aria-roledescription="tile"
+            aria-live="polite"
+          ></div>
+        </div>
+        <div class="guess-row" role="group" aria-label="row 3">
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+        </div>
+        <div class="guess-row" role="group" aria-label="row 4">
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+        </div>
+        <div class="guess-row" role="group" aria-label="row 5">
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+        </div>
+        <div class="guess-row" role="group" aria-label="row 6">
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+          <div class="guess-cell"></div>
+        </div>
+      </div>
+      <div class="keyboard" role="group" aria-label="keyboard">
+        <div class="keyboard-row">
+          <button class="keyboard-button">1</button>
+          <button class="keyboard-button">2</button>
+          <button class="keyboard-button">3</button>
+          <button class="keyboard-button">4</button>
+          <button class="keyboard-button">5</button>
+          <button class="keyboard-button">6</button>
+          <button class="keyboard-button">7</button>
+          <button class="keyboard-button">8</button>
+          <button class="keyboard-button">9</button>
+          <button class="keyboard-button">0</button>
+        </div>
+        <div class="keyboard-row">
+          <button class="keyboard-button keyboard-button-enter">ENTER</button>
+          <button class="keyboard-button" aria-label="addition">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <button class="keyboard-button" aria-label="subtraction">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+          </button>
+          <button class="keyboard-button" aria-label="multiplication">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <button class="keyboard-button" aria-label="division">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <circle cx="12" cy="6" r="2"></circle>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <circle cx="12" cy="18" r="2"></circle>
+            </svg>
+          </button>
+          <button class="keyboard-button" aria-label="modulo">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <line x1="19" y1="5" x2="5" y2="19"></line>
+              <circle cx="6.5" cy="6.5" r="2.5"></circle>
+              <circle cx="17.5" cy="17.5" r="2.5"></circle>
+            </svg>
+          </button>
+          <button class="keyboard-button" aria-label="exponentation">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <polyline points="18 12 12 6 6 12"></polyline>
+            </svg>
+          </button>
+          <button class="keyboard-button" aria-label="equality">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <line x1="5" y1="9" x2="19" y2="9"></line>
+              <line x1="5" y1="15" x2="19" y2="15"></line>
+            </svg>
+          </button>
+          <button class="keyboard-button" aria-label="backspace">
+            <svg
+              class="icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M21 4H8l-7 8 7 8h13a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"
+              ></path>
+              <line x1="18" y1="9" x2="12" y2="15"></line>
+              <line x1="12" y1="9" x2="18" y2="15"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
