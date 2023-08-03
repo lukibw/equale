@@ -1,5 +1,5 @@
-export { Random, generate } from "./generate";
-export { Digit, Operator, Token } from "./token";
+export { type Random, generate } from "./generate";
+export type { Digit, Operator, Token } from "./token";
 export {
   Issue,
   IssueKind,

@@ -1,0 +1,15 @@
+.container {
+  min-height: 100vh;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container > * + * {
+  margin-top: 40px;
+}
+
+.header {
+  font-size: 4rem;
+}

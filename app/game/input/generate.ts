@@ -138,7 +138,7 @@ const variants: Variant[] = [
     return [shift([x1, "%", x2], "*", y), "=", (x1 % x2) * y];
   },
   (random) => {
-    const bounds = {
+    const bounds: Record<number, number> = {
       2: 6,
       3: 4,
       4: 3,

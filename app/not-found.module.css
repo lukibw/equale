@@ -1,0 +1,25 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  font-size: 5rem;
+}
+
+.paragraph {
+  font-size: 2.5rem;
+}
+
+.link {
+  font-size: 2.5rem;
+  color: #00becc;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
