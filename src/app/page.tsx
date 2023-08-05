@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import { Game } from "./game";
+import { Game } from "../game";
 
 export default function Page() {
   return (

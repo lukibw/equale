@@ -1,0 +1,16 @@
+.board {
+  display: flex;
+  flex-direction: column;
+}
+
+.board > * + * {
+  margin-top: 7px;
+}
+
+.row {
+  display: flex;
+}
+
+.row > * + * {
+  margin-left: 7px;
+}

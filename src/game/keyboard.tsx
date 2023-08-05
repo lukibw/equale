@@ -1,4 +1,4 @@
-import { Digit, Operator, Token } from "./input";
+import { Digit, Operator, Token } from "./equation";
 import styles from "./keyboard.module.css";
 import { BackspaceIcon } from "./icon";
 import { operatorMap } from "./operator";
